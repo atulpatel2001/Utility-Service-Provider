@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<section>
+	<div class="container">
+		<div action="#" class="search">
+			<svg class="search__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"
+				 xmlns="http://www.w3.org/2000/svg">
+				<path d="M10.5418 19.25C15.3513 19.25 19.2502 15.3512 19.2502 10.5417C19.2502 5.73223 15.3513 1.83337 10.5418 1.83337C5.73235 1.83337 1.8335 5.73223 1.8335 10.5417C1.8335 15.3512 5.73235 19.25 10.5418 19.25Z"
+					  stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M20.1668 20.1667L18.3335 18.3334" stroke="#596780" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+			<input type="text" id="search-pending-service-serviceman" class="search__input"
+				   placeholder="Search service using name" onkeyup="searchPendingServiceForServiceMan()">
+		</div>
+		
+		<div class="search-result-pending-service-serviceman mt-3"></div>
+		<div class="card mt-3">
+			<div class="card-header text-center">
+				Pending Service
+			</div>
+			<div class="card-body text-center">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th scope="col">RequestId</th>
+						<th scope="col">ServiceName</th>
+						<th scope="col">Booking Date</th>
+						<th scope="col">Service Amount</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="pending:${pendingBooking}">
+						<td th:text="${pending.bookingDetail.service_request_number}">Otto</td>
+						<td th:text="${pending.bookingDetail.service.service_name}">Mark</td>
+						<td th:text="${pending.bookingDetail.booking_date}">Otto</td>
+						<td th:text="${pending.bookingDetail.service.service_amount}">Otto</td>
+						<td>
+							<a class="btn btn-info btn-sm mr-1"
+							   th:href="@{'/service-provider/'+${pending.bookingDetail.booking_id}+'/service-info'}">Readmore</a>
+							
+							
+							<a class="btn btn-success btn-sm mt-1"  th:if="${pending.bookingDetail.transcation.transcation_status == 'false' && pending.hasSchedule()}"
+							            th:onclick="cashPayment(/*[[${pending.bookingDetail.booking_id}]]*/)">Complete</a>
+								<a class="btn btn-success btn-sm mt-1" th:if="${pending.bookingDetail.transcation.transcation_status == 'true' && pending.hasSchedule()}"
+								   th:href="@{'/service-provider/'+${pending.bookingDetail.booking_id}+'/complete-service'}">Complete</a>
+							
+							
+							<button th:if="${!pending.hasSchedule()}" type="button" class="btn btn-secondary btn-sm"
+									data-toggle="modal"
+									th:data-target="'#exampleModal-' + ${pending.bookingDetail.booking_id}"
+									data-whatever="@mdo">Send Schedule
+							</button>
+							
+							<!-- start model -->
+							<div style="text-align: left" class="modal fade"
+								 th:id="'exampleModal-' + ${pending.bookingDetail.booking_id}" tabindex="-1"
+								 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Generate Schedule</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form th:action="@{/service-provider/generate-schedule}" method="POST">
+												<input type="text" th:value="${pending.bookingDetail.booking_id}"
+													   hidden="hidden" name="bookingId"/>
+												<div class="form-group">
+													<label for="recipient-name" class="col-form-label">Select
+														Date:</label>
+													<input type="date" class="form-control" id="recipient-name"
+														   name="schedule_date">
+												</div>
+												<div class="form-group">
+													<label for="message-text" class="col-form-label">Message:</label>
+													<textarea class="form-control" id="message-text"
+															  name="schedule_discription"></textarea>
+												</div>
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-success">Generate</button>
+													<button type="reset" class="btn btn-warning">Reset</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- model end -->
+						</td>
+					</tr>
+					
+					</tbody>
+				</table>
+			</div>
+			<div aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li th:if="${currentPage != 0 }" class="page-item">
+						<a class="page-link" th:href="@{'/service-provider/pending-service/' + ${currentPage - 1}}">Previous</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+						th:classappend="${currentPage == i-1 ? 'active' : ''}">
+						<a class="page-link" th:href="@{'/service-provider/pending-service/' + ${i-1}}">
+							<span th:text="${i}"></span>
+						</a>
+					</li>
+					<li th:if="${currentPage + 1 != totalPages}" class="page-item">
+						<a class="page-link"
+						   th:href="@{'/service-provider/pending-service/' + ${currentPage + 1}}">Next</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

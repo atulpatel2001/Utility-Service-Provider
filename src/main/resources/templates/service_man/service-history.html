@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+
+<section>
+	
+	<div class="container">
+		<div action="#" class="search">
+			<svg class="search__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"
+				 xmlns="http://www.w3.org/2000/svg">
+				<path d="M10.5418 19.25C15.3513 19.25 19.2502 15.3512 19.2502 10.5417C19.2502 5.73223 15.3513 1.83337 10.5418 1.83337C5.73235 1.83337 1.8335 5.73223 1.8335 10.5417C1.8335 15.3512 5.73235 19.25 10.5418 19.25Z"
+					  stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M20.1668 20.1667L18.3335 18.3334" stroke="#596780" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+			<input type="text" class="search__input" placeholder="Search service using name"
+				   id="search-completed-service-serviceman" onkeyup="searchCompletedServiceForServiceMan()">
+		</div>
+		<div class="search-result-completed-service-serviceman mt-3"></div>
+		<div class="card text-center mt-3">
+			
+			<div class="card-header">
+				History
+			</div>
+			<div class="card-body">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th scope="col">RequestId</th>
+						<th scope="col">Name</th>
+						<th scope="col">Booking Date</th>
+						<th scope="col">Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="history:${bookingHistory}">
+						<td th:text="${history.bookingDetail.service_request_number}">Otto</td>
+						<td th:text="${history.bookingDetail.service.service_name}">Mark</td>
+						<td th:text="${history.bookingDetail.booking_date}">Otto</td>
+						<td><a class="btn btn-info btn-sm"
+							   th:href="@{'/service-provider/'+${history.bookingDetail.booking_id}+'/service-info'}">Readmore</a>
+						</td>
+					
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li th:if="${currentPage != 0 }" class="page-item">
+						<a class="page-link" th:href="@{'/admin/service-history/' + ${currentPage - 1}}">Previous</a>
+					</li>
+					<li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+						th:classappend="${currentPage == i-1 ? 'active' : ''}">
+						<a class="page-link" th:href="@{'/admin/service-history/' + ${i-1}}">
+							<span th:text="${i}"></span>
+						</a>
+					</li>
+					<li th:if="${currentPage + 1 != totalPages}" class="page-item">
+						<a class="page-link" th:href="@{'/admin/service-history/' + ${currentPage + 1}}">Next</a>
+					</li>
+				</ul>
+			</div>
+		
+		</div>
+	</div>
+</section>
+
+</body>
+</html>

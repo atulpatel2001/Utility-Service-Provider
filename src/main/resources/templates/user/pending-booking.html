@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{/user/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<div class="container mt-2">
+	<div class="justify-content-center">
+		<div class="md-8">
+			<div class="card">
+				<div class="card-header text-center">
+					Pending Request
+				</div>
+				<div class="card-body table-responsive">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th scope="col">RequestId</th>
+							<th scope="col">Service</th>
+							<th scope="col">Booking Date</th>
+							<th scope="col">Action</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="pending:${ServiceStatusPending}">
+							<td th:text="${pending.service_request_number}">Otto</td>
+							<td th:text="${pending.service.service_name}">Mark</td>
+							<td th:text="${pending.booking_date}">Otto</td>
+							<td class=" justify-content-between align-items-center">
+								<button class="btn btn-info btn-sm text-white " data-toggle="modal"
+								   data-target="#exampleModalCenter"
+								   th:onclick="setData(/*[[${pending.booking_id}]]*/)">Status</button>|
+								<a class="btn btn-danger btn-sm  mt-2 mt-md-0"
+								   th:href="@{'/user/'+${pending.booking_id}+'/cancle-booking'}">Cancel</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div aria-label="Page navigation " th:if="${totalPages > 0}">
+					<ul class="pagination justify-content-center">
+						<li th:if="${currentPage != 0 }" class="page-item">
+							<a class="page-link" th:href="@{'/user/booking-pending/' + ${currentPage - 1}}">Previous</a>
+						</li>
+						<li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+							th:classappend="${currentPage == i-1 ? 'active' : ''}">
+							<a class="page-link" th:href="@{'/user/booking-pending/' + ${i-1}}">
+								<span th:text="${i}"></span>
+							</a>
+						</li>
+						<li th:if="${currentPage + 1 != totalPages}" class="page-item">
+							<a class="page-link" th:href="@{'/user/booking-pending/' + ${currentPage + 1}}">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+	 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-center" id="exampleModalLongTitle">Status And Schedule</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="modal-body">
+				<!--					<div class="schedule"></div>-->
+				<!--					<br>-->
+				<!--					<div class="progress-container">-->
+				<!--						<p class="left-heading">Pending</p>-->
+				<!--						<div class="progress-bar">-->
+				<!--							<div class="progress" id="progress"></div>-->
+				<!--						</div>-->
+				<!--						<p class="right-heading">Completed</p>-->
+				<!--					</div>-->
+				<section class="root">
+					<figure>
+						<figcaption>
+							<h4 class="big-text" id="booking-id"></h4>
+							<h6 class="big-text" id="booking_address"></h6>
+							<h2 class="big-text" id="booking-date" ></h2>
+						</figcaption>
+					</figure>
+					<div class="order-track">
+						<div class="order-track-step">
+							<div class="order-track-status">
+								<span class="order-track-status-dot"></span>
+								<span class="order-track-status-line"></span>
+							</div>
+							<div class="order-track-text">
+								<p class="order-track-text-stat">Booking Date</p>
+								<span class="order-track-text-sub" id="order-track-text-sub1"></span>
+							</div>
+						</div>
+						<div class="order-track-step">
+							<div class="order-track-status">
+								<span class="order-track-status-dot"></span>
+								<span class="order-track-status-line"></span>
+							</div>
+							<div class="order-track-text">
+								<p class="order-track-text-stat" id="order-track-text-stat2"> </p>
+								<span class="order-track-text-sub" id="order-track-text-sub2"></span>
+							</div>
+						</div>
+						<div class="order-track-step">
+							<div class="order-track-status">
+								<span class="order-track-status-dot"></span>
+								<span class="order-track-status-line"></span>
+							</div>
+							<div class="order-track-text">
+								<p class="order-track-text-stat" id="order-track-text-stat3"> </p>
+								<span class="order-track-text-sub" id="order-track-text-sub3"></span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" th:href="@{/css/ForUser.css}"/>
+</body>
+</html>

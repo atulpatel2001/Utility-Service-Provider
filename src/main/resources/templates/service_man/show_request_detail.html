@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<section>
+	
+	<div class="container " style="margin-top:70px;">
+		<div class="card text-center">
+			<div class="card-header">
+				Request Detail
+			</div>
+			<div class="card-body">
+				<table class="table">
+					
+					<tbody>
+					<tr>
+						<th scope="row">RequestId :</th>
+						<td th:text="${allocateBooking.bookingDetail.service_request_number}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Name :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_person}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Email :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_email}">/td>
+					
+					</tr>
+					
+					<tr>
+						<th scope="row">PhoneNumber :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_phone}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">City :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_city}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">State :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_state}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Pincode :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_pincode}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Address :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_address}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Booking Date :</th>
+						<td th:text="${allocateBooking.bookingDetail.booking_date}">/td>
+					
+					</tr>
+					
+					</tbody>
+				</table>
+			
+			</div>
+			<div class="card-footer ">
+				<a th:href="@{'/service-provider/'+${allocateBooking.allocate_booking_id}+'/accept-booking'}"
+				   class="btn btn-success">Accept</a>
+				<a th:href="@{'/service-provider/'+${allocateBooking.allocate_booking_id}+'/decline-booking'}"
+				   class="btn btn-warning">Decline</a>
+			
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

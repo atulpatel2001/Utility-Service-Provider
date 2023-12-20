@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:fragment="Layout(content)">
+<head>
+	
+	
+	<link rel="icon" type="image/x-icon" th:href="@{/back_image/robot.jpg}">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		  crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	
+	<link rel="stylesheet" href="//ws.oneassist.in/static/portal_v2/hash/hash-files/common-below-dls.58ad2623.css">
+	<link rel="stylesheet" href="//ws.oneassist.in/static/portal_v2/hash/hash-files/auto-complete.fbc9d3da.css">
+	<link rel="stylesheet" href="//ws.oneassist.in/static/portal_v2/hash/hash-files/style.da39a3ee.css">
+	<link rel="stylesheet" href="//ws.oneassist.in/static/portal_v2/hash/hash-files/whyUs-testimonial.d6fe0c3c.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+	
+	<!--	<link rel="stylesheet" type="text/css" href="css/other/bootstrap.min.css">-->
+	<title th:text="${title}">Hello, world!</title>
+</head>
+<body>
+<div>
+	<div class="topbar text-white pt-2" style="background-color: black;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p class="pull-left hidden-xs">Utility Service Provider, the Best in India </p>
+					<p class="pull-right"><i class="fa fa-phone mr-1"></i>Booking Online +91-12345678910</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- nav bar start-->
+<nav class="navbar navbar-expand-lg navbar-dark  text-white primary-bg">
+	<a class="navbar-brand" href="#" th:href="@{/}"> <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30"
+														  height="30" class="d-inline-block align-top" alt=""></a>
+	<button
+			class="navbar-toggler"
+			type="button"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+	>
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			
+			
+			<li class="nav-item">
+				<a class="nav-link " th:href="@{/home/signin}">SIGNIN</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " th:href="@{/home/signup}">SIGNUP</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/home/service-provider}">REGISTER AS PROFESSIONAL</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+<!--end of navbar-->
+<!--nav bar end-->
+
+<div th:replace="${content}"></div>
+
+<!--	footer-->
+
+<footer class="hero">
+	<div class="container flex">
+		<div class="container__about">
+			<h2>About</h2>
+			<p>We offer a wide range of services to businesses and individuals alike, encompassing [home services,
+				professional services,Electric services, etc.]. Our experienced and skilled team of professionals is
+				equipped to handle complex work with utmost efficiency and precision, ensuring that our clients receive
+				top-notch results every time.</p>
+		</div>
+		<div class="container-pages flex">
+			
+			<div class="container__recentpages mr-5">
+				<!--					<h2>Recient Pages</h2>-->
+				<ul>
+					<li><a th:href="@{/home/about-us}">ABOUT US</a></li>
+					<li><a th:href="@{/home/contact-us}">CONTACT US</a></li>
+					<li><a th:href="@{/home/faq}">FAQ</a></li>
+					<li><a th:href="@{/home/tearm-of-use}">TERM OF USE</a></li>
+					<li><a th:href="@{/home/privacy}">PRIVACY</a></li>
+				</ul>
+			</div>
+			
+			<div class="container__more mr-5">
+				<!--					<h2>Recient Pages</h2>-->
+				<ul>
+					<li><a href="#">FEEDBACK</a></li>
+					<li><a href="https://challenge3-brayanom.netlify.app/">PROBLEM</a></li>
+				
+				</ul>
+			
+			</div>
+			
+			<div><h4>CONTACT</h4>
+				
+				<ul class="contact_footer mlist">
+					<li class="location">
+						<p><i class="fa fa-map-marker"></i> Faridabad, Haryana, India</p>
+					</li>
+					<li>
+						<p><i class="fa fa-envelope"></i> contact@surfsidemedia.in</p>
+					</li>
+					<li>
+						<p><i class="fa fa-phone"></i> +91-1234567890</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="ball"></div>
+		<div class="ball" style="--c: lightblue;--s:160px"></div>
+		<div class="ball" style="--c: lightgreen;--s:120px"></div>
+	</div>
+	<div class="line__separete"></div>
+	<div class="by flex">
+		<p>Copyright © 2022 All Rights Reserved by Brayan Ospina.</p>
+		<div class="icons">
+			<a href="https://t.co/VBNNTjtw3F" class="icon1 icon--instagram">
+				<i class="ri-instagram-line"></i>
+			</a>
+			<a href="#" class="icon1 icon--twitter">
+				<i class="ri-twitter-line"></i>
+			</a>
+			<a href="linkedin.com/in/brayan-ospina-8bb472243" class="icon1 icon--linkedin">
+				<i class="ri-linkedin-line"></i>
+			</a>
+			<a href="https://github.com/brayanospina2005/final-project" class="icon1 icon--github">
+				<i class="ri-github-line"></i>
+			</a>
+		</div>
+	</div>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+		integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+		integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/javascript/script.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+<section>
+	<main class=" p-5 " style="padding-bottom:80px">
+		
+		<div action="#" class="search">
+			<svg class="search__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"
+				 xmlns="http://www.w3.org/2000/svg">
+				<path d="M10.5418 19.25C15.3513 19.25 19.2502 15.3512 19.2502 10.5417C19.2502 5.73223 15.3513 1.83337 10.5418 1.83337C5.73235 1.83337 1.8335 5.73223 1.8335 10.5417C1.8335 15.3512 5.73235 19.25 10.5418 19.25Z"
+					  stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M20.1668 20.1667L18.3335 18.3334" stroke="#596780" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+			<input type="text" class="search__input" placeholder="Search something here" onkeyup="searchService()"
+				   id="search-service">
+		</div>
+		<div class="search-result-service mt-3"></div>
+		<div class="container mt-5 ">
+			
+			<!--			show services-->
+			<div class="m-3">
+				<button type="button" class="add-service-button"><i class="fa fa-plus"></i></button>
+				<span class="text-muted">Add Service</span>
+				<button type="button" class="show-service-button ml-4"><i class="fa fa-eye" aria-hidden="true"></i>
+				</button>
+				<span class="text-muted">Show Service</span>
+			
+			</div>
+			
+			
+			<div class="row show-services">
+				<div class="">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title text-uppercase mb-0">Manage Services</h5>
+						</div>
+						<div class="table-responsive">
+							<table class="table no-wrap user-table mb-0">
+								<thead>
+								<tr>
+									<th scope="col" class="border-0 text-uppercase font-medium pl-4">ID</th>
+									<th scope="col" class="border-0 text-uppercase font-medium">ServiceName</th>
+									<th scope="col" class="border-0 text-uppercase font-medium">Category</th>
+									<th scope="col" class="border-0 text-uppercase font-medium">AddDate</th>
+									<th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+								
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="service:${services}">
+									<td class="pl-4" th:text="'#SERVICE'+${service.service_id}">1</td>
+									<td>
+										<h5 class="font-medium mb-0" th:text="${service.service_name}">Daniel
+											Kristeen</h5>
+									</td>
+									
+									<td>
+										<span class="text-muted"
+											  th:text="${service.category.category_name}">15 Mar 1988</span><br>
+									
+									</td>
+									<td>
+										<span class="text-muted"
+											  th:text="${service.addServiceDate}">15 Mar 1988</span><br>
+									
+									</td>
+									
+									<td>
+<!--										<a type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle "><i-->
+<!--												class="fa fa-info-circle"></i> </a>-->
+										<button type="button"
+												class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2 delete-service"
+												id="delete-service" th:data-service_id="${service.service_id}"><i
+												class="fa fa-trash"></i></button>
+										<button type="button"
+												class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
+												data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i
+												class="fa fa-edit"></i></button>
+<!--										<button type="button"-->
+<!--												class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i-->
+<!--												class="fa fa-upload"></i></button>-->
+									</td>
+									
+									<!--			update category-->
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+										 aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title text-center" id="exampleModalLabel">Update
+														Service</h5>
+													<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													
+													<form id="reg-forma" th:action="@{/admin/update-serviceData}"
+														  method="POST" enctype="multipart/form-data">
+														<input type="hidden" th:value="${service.service_id}"
+															   name="service_id">
+														<div class="form-group">
+															<select class="custom-select" required name="categoryId">
+																<option selected
+																		th:text="${service.category.category_name}"
+																		th:value="${service.category.category_id}"></option>
+																<option th:each="category:${categories}"
+																		th:text="${category.category_name}"
+																		th:value="${category.category_id}"></option>
+															
+															</select>
+														
+														</div>
+														
+														<div class="form-group">
+															<label for="user_name">Service Name</label>
+															<input name="service_name" type="text" class="form-control"
+																   id="usr_name" aria-describedby="emailHelp"
+																   th:value="${service.service_name}" required>
+														
+														</div>
+														<div class="form-group">
+															<label for="user_name">Service Amount</label>
+															<input name="service_amount" type="text"
+																   class="form-control" id="service_amount"
+																   aria-describedby="emailHelp"
+																   th:value="${service.service_amount}" required>
+														
+														</div>
+														<div class="form-group">
+															<label for="about">About</label>
+															<textarea name="discription" class="form-control" id="abot"
+																	  rows="20"
+																	  th:text="${service.discription}"></textarea>
+														</div>
+														
+														
+														<div class="custom-file">
+															<input type="file" class="custom-file-input"
+																   id="validatedCustomFie" name="image1">
+															<label class="custom-file-label" for="validatedCustomFile">Service
+																Image</label>
+															<div class="invalid-feedback">Example invalid custom file
+																feedback
+															</div>
+														</div>
+														
+														
+														<div class="container text-center mt-3">
+															<button type="submit" class="btn btn-primary"
+																	id="submt-btn">Submit
+															</button>
+															<button type="reset" class="btn btn-warning" id="rest-btn">
+																Reset
+															</button>
+														</div>
+													</form>
+												
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close
+													</button>
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								</tr>
+								
+								
+								</tbody>
+							</table>
+						
+						</div>
+						
+						<div aria-label="Page navigation" th:if="${totalPages>=0}">
+							<ul class="pagination justify-content-center">
+								<li th:if="${currentPage != 0 }" class="page-item">
+									<a class="page-link" th:href="@{'/admin/add-service/' + ${currentPage - 1}}">Previous</a>
+								</li>
+								<li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+									th:classappend="${currentPage == i-1 ? 'active' : ''}">
+									<a class="page-link" th:href="@{'/admin/add-service/' + ${i-1}}">
+										<span th:text="${i}"></span>
+									</a>
+								</li>
+								<li th:if="${currentPage + 1 != totalPages}" class="page-item">
+									<a class="page-link"
+									   th:href="@{'/admin/add-service/' + ${currentPage + 1}}">Next</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!--			add services-->
+			<div class="col-md-6 offset-md-3" style="display:none;" id="add-service">
+				<div class="card mt-3">
+					<div class="card-header text-center primary-background text-white">
+						<span class="fa fa-3x fa-user-circle"></span>
+						<br>
+						Add Service
+					
+					</div>
+					<div class="container" th:if="${session.message}">
+						<div
+								th:classappend="${'alert-'+session.message.typeOfMessage}"
+								class="alert" role="alert">
+							<span th:text="${session.message.content}"> </span>
+						</div>
+						<th:block
+								th:text="${@sessionHelper.removeAttributeFromSession('message')}"></th:block>
+					</div>
+					<div class="card-body">
+						<form id="reg-form" th:action="@{/admin/add-serviceData}" method="POST"
+							  enctype="multipart/form-data">
+							
+							<div class="form-group">
+								<select class="custom-select" required name="categoryId">
+									<option selected>Select Service</option>
+									<option th:each="category:${categories}" th:text="${category.category_name}"
+											th:value="${category.category_id}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Service Name</label>
+								<input name="service_name" type="text" class="form-control" id="user_name"
+									   aria-describedby="emailHelp" placeholder="Enter Service Name" required>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Service Amount</label>
+								<input name="service_amount" type="text" class="form-control" id="service_mount"
+									   aria-describedby="emailHelp" required>
+							</div>
+							<div class="form-group">
+								<label for="about">About</label>
+								<textarea name="discription" class="form-control" id="about" rows="20"
+										  placeholder="Enter Something About Service"></textarea>
+							</div>
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="validatedCustomFile" name="image1"
+									   required>
+								<label class="custom-file-label" for="validatedCustomFile">Service Image</label>
+								<div class="invalid-feedback">Example invalid custom file feedback</div>
+							</div>
+							<div class="container text-center mt-3">
+								<button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+								<button type="reset" class="btn btn-warning" id="reset-btn">Reset</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</section>
+</body>
+</html>

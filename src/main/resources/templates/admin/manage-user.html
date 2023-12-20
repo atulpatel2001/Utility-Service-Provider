@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+<div class="container " style="margin-top:70px">
+	<div class="search">
+		<svg class="search__icon" width="22" height="22" viewBox="0 0 22 22" fill="none"
+			 xmlns="http://www.w3.org/2000/svg">
+			<path d="M10.5418 19.25C15.3513 19.25 19.2502 15.3512 19.2502 10.5417C19.2502 5.73223 15.3513 1.83337 10.5418 1.83337C5.73235 1.83337 1.8335 5.73223 1.8335 10.5417C1.8335 15.3512 5.73235 19.25 10.5418 19.25Z"
+				  stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			<path d="M20.1668 20.1667L18.3335 18.3334" stroke="#596780" stroke-width="1.5" stroke-linecap="round"
+				  stroke-linejoin="round"/>
+		</svg>
+		<input type="text" class="search__input" placeholder="Search something here" id="search-user"
+			   onkeyup="searchUser()">
+	</div>
+	<div class="search-result mt-3"></div>
+	<div class="row mt-5">
+		<div class="">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+				</div>
+				<div class="table-responsive">
+					<table class="table no-wrap user-table mb-0">
+						<thead>
+						<tr>
+							<th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+							<th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+							<th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+							<th scope="col" class="border-0 text-uppercase font-medium">Added</th>
+							<th scope="col" class="border-0 text-uppercase font-medium">Category</th>
+							<th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${users}">
+							<td class="pl-4" th:text="'#USER'+${user.user_id}">1</td>
+							<td>
+								<h5 class="font-medium mb-0" th:text="${user.user_name}">Daniel Kristeen</h5>
+							</td>
+							<td>
+								<span class="text-muted" th:text="${user.user_email}">daniel@website.com</span><br>
+							
+							</td>
+							<td>
+								<span class="text-muted" th:text="${user.user_joinDate}">15 Mar 1988</span><br>
+							
+							</td>
+							<td>
+								<select class="form-control category-select" id="roleSelect"
+										th:data-user-id="${user.user_id}">
+									<option th:text="${user.user_role}"></option>
+									<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+									<option value="ROLE_USER">ROLE_USER</option>
+								</select>
+							</td>
+							<td>
+<!--								        <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle "><i-->
+<!--										class="fa fa-key"></i></button>-->
+								<button type="button"
+										class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2 delete"
+										id="delete-user" th:data-user-id="${user.user_id}"><i class="fa fa-trash"></i>
+								</button>
+<!--								<button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i-->
+<!--										class="fa fa-edit"></i></button>-->
+<!--								<button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i-->
+<!--										class="fa fa-upload"></i></button>-->
+							</td>
+						</tr>
+						
+						
+						</tbody>
+					</table>
+				
+				</div>
+				
+				<div aria-label="Page navigation ">
+					<ul class="pagination justify-content-center">
+						<li th:if="${currentPage != 0 }" class="page-item">
+							<a class="page-link" th:href="@{'/admin/manage-user/' + ${currentPage - 1}}">Previous</a>
+						</li>
+						<li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+							th:classappend="${currentPage == i-1 ? 'active' : ''}">
+							<a class="page-link" th:href="@{'/admin/manage-user/' + ${i-1}}">
+								<span th:text="${i}"></span>
+							</a>
+						</li>
+						<li th:if="${currentPage + 1 != totalPages}" class="page-item">
+							<a class="page-link" th:href="@{'/admin/manage-user/' + ${currentPage + 1}}">Next</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+</body>
+</html>

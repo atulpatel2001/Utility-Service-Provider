@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+</head>
+<body>
+
+<div class="index-img1">
+	<img th:src="@{back_image/index.avif}"/>
+</div>
+<div class="responsive-container-block bigContainer">
+	<div class="responsive-container-block Container">
+		<img class="mainImg" th:src="@{back_image/mid1.avif}">
+		<div class="allText aboveText">
+			<p class="text-blk headingText">
+				Our Mission
+			</p>
+			<p class="text-blk subHeadingText">
+			
+			</p>
+			<p class="text-blk description">
+				The mission of a service provider, in a general context, can be defined as the purpose or objective of a
+				business or organization that offers services to its customers or clients. A service provider is a
+				company or entity that delivers various services, such as consulting, maintenance, technical support,
+				software development, telecommunications, healthcare, education, and many others.
+			</p>
+		
+		</div>
+	</div>
+	<div class="responsive-container-block Container bottomContainer">
+		<img class="mainImg" th:src="@{back_image/mid2.avif}">
+		<div class="allText bottomText">
+			<p class="text-blk headingText">
+				Our Vision
+			</p>
+			<p class="text-blk subHeadingText">
+			
+			</p>
+			<p class="text-blk description">
+				The vision of a service provider is a clear and concise description of the desired future state or
+				direction that the company aims to achieve through its services. It outlines the long-term goals,
+				aspirations, and the impact the service provider aims to make in its industry or market. A strong vision
+				statement guides the company's strategic decisions, shapes its culture, and inspires employees and
+				stakeholders to work towards a common purpose. It serves as a guiding light for the service provider's
+				growth and success.
+			</p>
+		
+		</div>
+	</div>
+</div>
+
+
+<div class="box-container">
+	<div class="box-item">
+		<div class="flip-box">
+			<div class="flip-box-front text-center"
+				 style="background-image: url('https://s25.postimg.cc/frbd9towf/cta-2.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Clean Home</h3>
+					<p>Your Clean Home, Our Pride!</p>
+					<img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+				</div>
+			</div>
+			<div class="flip-box-back text-center"
+				 style="background-image: url('https://s25.postimg.cc/frbd9towf/cta-2.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Clean Home</h3>
+					<p>Clean House, Happy Family</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-item">
+		<div class="flip-box">
+			<div class="flip-box-front text-center"
+				 style="background-image: url('https://s25.postimg.cc/hj4c4qnov/cta-3.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Faith</h3>
+					<p> Believe and Achieve</p>
+					<img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+				</div>
+			</div>
+			<div class="flip-box-back text-center"
+				 style="background-image: url('https://s25.postimg.cc/hj4c4qnov/cta-3.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Faith</h3>
+					<p>A Journey of Hope</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-item">
+		<div class="flip-box">
+			<div class="flip-box-front text-center filter-"
+				 style="background-image: url('https://s25.postimg.cc/l2q9ujy4f/cta-4.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Satisfaction</h3>
+					<p>Delivering Satisfaction, Every Step of the Way!</p>
+					<img src="https://s25.postimg.cc/65hsttv9b/cta-arrow.png" alt="" class="flip-box-img">
+				</div>
+			</div>
+			<div class="flip-box-back text-center"
+				 style="background-image: url('https://s25.postimg.cc/l2q9ujy4f/cta-4.png');">
+				<div class="inner color-white">
+					<h3 class="flip-box-header">Satisfaction</h3>
+					<p>Your Happiness, Our Priority!</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="serviceDeliver">
+		<div class="container">
+			<div class="row">
+				<div class="btnWidth"></div>
+				<div class="container text-center">
+					<h3 class="headAc">Trusted Service Delivered.</h3>
+				</div>
+				<div class="mainFlexBody">
+					<div class="mainDivFlex">
+						<div class="fullWidth ">
+							<img src="//ws.oneassist.in/static/portal_v2/hash/hash-files/rating-tv.69f6672b.png"
+								 alt="Image">
+							<h3 class="ng-binding">4.7/5 rating</h3>
+							<span class="ng-binding">by customers for AC service &amp; repairs</span>
+						</div>
+						<div class="fullWidth">
+							<img id="deviceIcon" src="//ws.oneassist.in/static/portal_v2/images/quick-repair/AC.png"
+								 alt="Image">
+							<h3 id="deviceCount">10,000+</h3>
+							<span class="ng-binding">AC service &amp; repairs done since lockdown</span>
+						</div>
+						<div class="fullWidth ">
+							<img src="//ws.oneassist.in/static/portal_v2/hash/hash-files/rupee-icon.d17d9dca.png"
+								 alt="Image">
+							<h3>Pay after service is available</h3>
+							<span>in Location</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

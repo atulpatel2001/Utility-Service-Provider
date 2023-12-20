@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<section>
+	
+	<div class="container ">
+		<div class="card text-center">
+			<div class="card-header">
+				Service Detail
+			</div>
+			<div class="card-body">
+				<table class="table">
+					
+					<tbody>
+					<tr>
+						<th scope="row">RequestId :</th>
+						<td th:text="${bookingDetail.service_request_number}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Name :</th>
+						<td th:text="${bookingDetail.booking_person}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Email :</th>
+						<td th:text="${bookingDetail.booking_email}">/td>
+					
+					</tr>
+					
+					<tr>
+						<th scope="row">PhoneNumber :</th>
+						<td th:text="${bookingDetail.booking_phone}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">City :</th>
+						<td th:text="${bookingDetail.booking_city}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">State :</th>
+						<td th:text="${bookingDetail.booking_state}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Pincode :</th>
+						<td th:text="${bookingDetail.booking_pincode}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Address :</th>
+						<td th:text="${bookingDetail.booking_address}">/td>
+					
+					</tr>
+					<tr>
+						<th scope="row">Booking Date :</th>
+						<td th:text="${bookingDetail.booking_date}">/td>
+					</tr>
+					
+					
+					<tr>
+						<th scope="row">Service Status :</th>
+						<td th:text="${bookingDetail.service_status}">/td>
+					</tr>
+					
+					<tr>
+						<th scope="row">Transcation Mode :</th>
+						<td th:text="${bookingDetail.transcation.transcation_mode}">/td>
+					</tr>
+					
+					<tr>
+						<th scope="row">Transcation Status :</th>
+						<td th:text="${bookingDetail.transcation.transcation_status}">/td>
+					
+					</tr>
+					
+					</tbody>
+				</table>
+			
+			</div>
+			<div class="card-footer " th:if="${bookingDetail.service_status == 'Pending'}">
+				
+				<div th:if="${pending.hasSchedule()}">
+					<a class="btn btn-success btn-sm"  th:if="${pending.bookingDetail.transcation.transcation_status == 'false'}"
+					   th:onclick="cashPayment(/*[[${pending.bookingDetail.booking_id}]]*/)">Complete</a>
+					<a class="btn btn-success btn-sm" th:if="${pending.bookingDetail.transcation.transcation_status == 'true'}"
+					   th:href="@{'/service-provider/'+${bookingDetail.booking_id}+'/complete-service'}">Complete</a>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

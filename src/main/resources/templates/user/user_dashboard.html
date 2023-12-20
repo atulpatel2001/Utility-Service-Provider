@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{/user/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<!--style="background:#757575"-->
+<section>
+	<div class="header-index">
+		
+		<img th:src="@{/back_image/userdesh2.webp}" style=" width:100%">
+	
+	</div>
+	
+	<div class='container mt-5'>
+		<div class='row mb-3'>
+			<div class='col-md-4 mb-3 ' th:each="category:${categories}">
+				<a th:href="@{/user/{category_id}/selected-services(category_id=${category.category_id})}">
+					<!--				<div class="card" style="width: 22rem;border-radius: 25px 25px ;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;" >-->
+					<!--					<img style="height:250px;border-radius: 25px 25px 0px 0px ;" class="card-img-top" src="..." alt="Card image cap" th:src="@{'/back_image/category_image/'+${category.image}}" >-->
+					<!--					<div class="card-body">-->
+					<!--						<h5 class="card-title text-center" th:text="${category.category_name}">Card title</h5>-->
+					<!--					</div>-->
+					<!--				</div>-->
+					
+					<div class="cardi 1">
+						<div class="card_image"><img th:src="@{'/back_image/category_image/'+${category.image}}"/></div>
+						<div class="card_title title-white">
+							<p th:text="${category.category_name}">Card Title</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="container text-center">
+		<div class="common-section text-center">
+			<h2>Trusted Services Provider</h2>
+			<div class="truested">
+				<div class="row">
+					<div class="col-xs-6 col-sm-4cols" style="margin-left:250px;">
+						<div class="prime-service">
+							<img class="lazy" alt="High Quality Service" width="76px" height="76px"
+								 src="https://www.mannubhai.com/images/qualityicon.webp" style="">
+						</div>
+						<div class="prime-attribute">
+							<span>Certified Professionals</span>
+						</div>
+					</div>
+					<div class="col-xs-9 col-sm-4cols ml-5">
+						<div class="prime-service">
+							<img class="lazy" alt="Water Purifier" width="76px" height="76px"
+								 src="https://www.mannubhai.com/images/truest.webp" style="">
+						</div>
+						<div class="prime-attribute">
+							<span>Service Warranty</span>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4cols ml-5">
+						<div class="prime-service">
+							<img class="lazy" alt="Water Purifier" width="76px" height="76px"
+								 src="https://www.mannubhai.com/images/book.webp" style="">
+						</div>
+						<div class="prime-attribute">
+							<span>Instant Booking</span>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4cols ml-5">
+						<div class="prime-service">
+							<img class="lazy" alt="Affordable Price" width="76px" height="76px"
+								 src="https://www.mannubhai.com/images/price.webp" style="">
+						</div>
+						<div class="prime-attribute">
+							<span>Affordable Price</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</section>
+</body>
+</html>

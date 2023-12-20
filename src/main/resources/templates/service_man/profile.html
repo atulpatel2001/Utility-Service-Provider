@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Profile</title>
+	
+</head>
+<body>
+<div class="profile-container" style="background-color:#b2dfdb;">
+	<img th:src="@{'/back_image/serviceman_profile/'+${serviceMan.serviceman_profile}}" alt="Profile Image" class="profile-image">
+	<h2 class="user-info" th:text="'&#128113; User Name: ' + ${serviceMan.user.user_name}"> </h2>
+	<p class="user-info" th:text="'&#128231; Email: '+${serviceMan.user.user_email}">
+	
+	</p>
+	<p class="user-info" th:text="'&#128273; Role: '+${serviceMan.user.user_role}">
+	
+	</p>
+	<p class="user-info" th:text="'&#128241; Phone Number: '+${serviceMan.serviceman_phoneNumber}">
+	
+	</p>
+	<p class="user-info" th:text="'&#128100; Gender: '+${serviceMan.serviceman_gender}">
+	
+	</p>
+	<p class="user-info" th:text="'&#128179; City: '+${serviceMan.serviceman_city}">
+	
+	</p>
+	<p class="user-info" th:text="'&#127759; State: '+${serviceMan.serviceman_state}">
+	
+	</p>
+	<p class="user-info " th:text="'&#128197; Pincode: '+${serviceMan.serviceman_pincode}">
+	
+	</p>
+	<p class="user-info " th:text="'&#128100; Status: '+${serviceMan.serviceman_status}">
+	
+<!--		<span class="status-indicator status-active"></span> Active-->
+		<!-- Use status-inactive class for inactive status -->
+	</p>
+	
+	
+	
+	<a style="color:black;font-size:15px;font-weight:bold;" class="fa fa-id-card user-info" th:href="@{'/service-provider/adhar-card/'+${serviceMan.serviceman_id}}"> AdharCard</a>
+	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalPush">Update Profile</button>
+</div>
+	<!--Modal: modalPush-->
+	<div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog modal-notify modal-info" role="document">
+			<!--Content-->
+			<div class="modal-content">
+				<!--Header-->
+				<div class="modal-header d-flex justify-content-center">
+					<p class="heading">Update Profile</p>
+				</div>
+				
+				<!--Body-->
+				<div class="modal-body">
+					<div class="text-center">
+					
+					
+					<img th:src="@{'/back_image/serviceman_profile/'+${serviceMan.serviceman_profile}}" alt="Profile Image" class="profile-image "></div>
+					<form id="reg-form" th:action="@{/service-provider/update-serviceman}" method="POST" th:object="${serviceMan}"
+						  enctype="multipart/form-data">
+						<input name="serviceman_id" type="text" class="form-control" id="serviceman_id" th:value="${serviceMan.serviceman_id}"
+							   aria-describedby="emailHelp" hidden="hidden" >
+						<div class="form-group">
+							<label for="user_name">ServiceMan Name</label>
+							<input name="user_name" type="text" class="form-control" id="user_name" th:value="${serviceMan.user.user_name}"
+								   aria-describedby="emailHelp"  >
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label>
+							<input name="user_email" type="email" class="form-control" id="exampleInputEmail1"
+								   aria-describedby="emailHelp"  th:value="${serviceMan.user.user_email}" >
+							<small id="emailHelp" class="form-text text-muted">We'll never share your email with
+								anyone else.</small>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Mobile Number</label>
+							<input name="serviceman_phoneNumber" type="number" class="form-control"
+								   id="exampleInputEmail11" aria-describedby="emailHelp"
+								    th:value="${serviceMan.serviceman_phoneNumber}">
+						</div>
+						<br>
+						<div class="container text-center mt-3">
+							<button type="submit" class="btn btn-primary" id="submit-bt">Submit</button>
+							<button type="reset" class="btn btn-warning" id="submit-btn">Reset</button>
+						</div>
+					</form>
+				
+				</div>
+				
+				<!--Footer-->
+				<div class="modal-footer flex-center">
+					
+					<a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">No</a>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
+	<!--Modal: modalPush-->
+<link rel="stylesheet" th:href="@{/css/ForServiceMan.css}"/>
+</body>
+</html>

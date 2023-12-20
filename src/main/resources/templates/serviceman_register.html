@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+
+<section style="background:#9E9E9E;">
+	<main class="p-5" style="padding-bottom:80px;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header text-center text-white primary-bg">
+							<span class="fa fa-3x fa-user-circle"></span>
+							<br>
+							<h3>Register Here!</h3>
+						</div>
+						<div class="container" th:if="${session.message}">
+							<div th:classappend="${'alert-'+session.message.typeOfMessage}"
+								 class="alert" role="alert">
+								<span th:text="${session.message.content}"> </span>
+							</div>
+							<th:block th:text="${@sessionHelper.removeAttributeFromSession('message')}"></th:block>
+						</div>
+						<div class="card-body" style="background:#EEEEEE;">
+							<form id="reg-form" th:action="@{/home/serviceman}" method="POST"
+								  enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="user_name">ServiceMan Name</label>
+									<input name="user_name" type="text" class="form-control" id="user_name"
+										   aria-describedby="emailHelp" placeholder="Enter Name" required>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Email address</label>
+									<input name="user_email" type="email" class="form-control" id="exampleInputEmail1"
+										   aria-describedby="emailHelp" placeholder="Enter email" required>
+									<small id="emailHelp" class="form-text text-muted">We'll never share your email with
+										anyone else.</small>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">Mobile Number</label>
+									<input name="serviceman_phoneNumber" type="number" class="form-control"
+										   id="exampleInputEmail1" aria-describedby="emailHelp"
+										   placeholder="Enter Mobile Number" required>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Create Password</label>
+									<input name="user_password" type="password" class="form-control"
+										   id="exampleInputPassword1" placeholder="Password" required>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Select Gender</label>
+									<br>
+									<input type="radio" id="genderMale" name="serviceman_gender" value="Male">Male
+									<input type="radio" id="genderFemale" name="serviceman_gender" value="Female">Female
+								</div>
+								<div class="form-group ">
+									<label for="inputState">Services</label>
+									<select id="inputState" class="form-control custom-select" required
+											name="serviceId">
+										<option selected>Select Service</option>
+										<option th:each="service:${services}" th:text="${service.service_name}"
+												th:value="${service.service_id}">
+										</option>
+									</select>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-4">
+										<label for="inputCity">City</label>
+										<input type="text" class="form-control" id="inputCity" name="serviceman_city"
+											   placeholder="Enter City" required>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="inputState">State</label>
+										<input type="text" class="form-control" id="inputState" name="serviceman_state"
+											   placeholder="Enter State" required>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="inputZip">ZipCode</label>
+										<input type="text" class="form-control" id="inputZip"
+											   placeholder="Enter ZipCode" required name="serviceman_pincode">
+									</div>
+								</div>
+								<div class="custom-file">
+									<input type="file" name="profile" class="custom-file-input" id="validatedCustomFile"
+										   required>
+									<label class="custom-file-label" for="validatedCustomFile">Select Your
+										Profile</label>
+									<div class="invalid-feedback">Example invalid custom file feedback</div>
+								</div>
+								<div class="custom-file mt-2 mb-2">
+									<input type="file" name="adharcard" class="custom-file-input"
+										   id="validatedCustomFile1" required>
+									<label class="custom-file-label" for="validatedCustomFile1">Select Adharcard</label>
+									<div class="invalid-feedback">Example invalid custom file feedback</div>
+									<small class="form-text text-muted">Upload File As PDF</small>
+								</div>
+								<div class="form-check text-center">
+									<input name="user_termAndCondition" type="checkbox" class="form-check-input"
+										   id="exampleCheck1" value="true" required>
+									<label class="form-check-label" for="exampleCheck1">Agree to terms and
+										conditions</label>
+								</div>
+								<br>
+								<div class="container text-center mt-3">
+									<button type="submit" class="btn btn-primary" id="submit-bt">Submit</button>
+									<button type="reset" class="btn btn-warning" id="submit-btn">Reset</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</section>
+</body>
+</html>

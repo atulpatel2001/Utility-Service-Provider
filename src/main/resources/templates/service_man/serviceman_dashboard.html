@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{service_man/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<section>
+	<div class="container-fluid mt-0">
+		<!--	<img th:src="@{/back_image/serviceman_dashboard.jpeg}" style="height:380px ;width:100%">-->
+	</div>
+	<div class="container mt-4">
+		<div class="container bootstrap snippet">
+			<div class="row">
+				<div class="col-lg-2 col-sm-6 " style="margin-left:200px;">
+					<div class="circle-tile ">
+						<div href="#">
+							<div class="circle-tile-heading dark-blue"><i class="fa fa-refresh fa-fw fa-3x"></i></div>
+						</div>
+						<div class="circle-tile-content dark-blue">
+							<div class="circle-tile-description text-faded"> Pending Services</div>
+							<div class="circle-tile-number text-faded " th:text="${count}">265</div>
+							<a class="circle-tile-footer" th:href="@{/service-provider/pending-service/0}">More Info<i
+									class="fa fa-chevron-circle-right ml-1"></i></a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-2 col-sm-6" style="margin-left:280px;">
+					<div class="circle-tile ">
+						<div href="#">
+							<div class="circle-tile-heading red"><i class="fa fa-check fa-fw fa-3x"></i></div>
+						</div>
+						<div class="circle-tile-content red">
+							<div class="circle-tile-description text-faded">Completed Services</div>
+							<div class="circle-tile-number text-faded" th:text="${cCount}">10</div>
+							<a class="circle-tile-footer" th:href="@{/service-provider/service-history/0}">More Info<i
+									class="fa fa-chevron-circle-right ml-1"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="card mt-5">
+			<div class="text-center text-muted m-2">Active Schedule Information</div>
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Deadline</th>
+					<th scope="col">Edit Schedule</th>
+					<th scope="col">Booking Info</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="booking:${bookingWithSchedule}">
+					<td th:text="${booking.bookingDetail.service_request_number}">1</td>
+					<td th:text="${booking.bookingDetail.booking_person}">Mark</td>
+					<td th:text="${booking.schedule.schedule_date}">Otto</td>
+					<td>
+						<button data-backdrop="false" data-toggle="modal" th:data-target="'#exampleModalCenter-'+ ${booking.bookingDetail.booking_id}"
+								class="btn btn-sm btn-primary"><i class="far fa-edit"></i> Edit
+						</button>
+						<!--<a class="btn btn-sm btn-danger" href="#"><i class="fas fa-trash-alt"></i> delete</a>-->
+					</td>
+					<td><a class="btn btn-sm btn-info"
+						   th:href="@{'/service-provider/'+${booking.bookingDetail.booking_id}+'/service-info'}"><i
+							class="fas fa-info-circle mr-1"></i>Details</a></td>
+					
+					<!-- Modal -->
+					<div class="modal fade" th:id="'exampleModalCenter-'+${booking.bookingDetail.booking_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Update Schedule</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form th:action="@{/service-provider/update-schedule}" method="post">
+										<input type="hidden" th:value="${booking.schedule.schedule_id}"
+											   name="schedule_id" id="form" class="form-control ml-0">
+										
+										<div class="text-center text-muted m-4"
+											 th:text="'Old Date:-'+${booking.schedule.schedule_date}"></div>
+										<div class="md-form ml-0 mr-0">
+											<input type="date" name="date" id="form1" class="form-control ml-0">
+											<label for="form1" class="ml-0">Enter Date</label>
+										</div>
+										
+										<div class="text-center">
+											<button class="btn btn-cyan mt-1">Save <i class="fa fa-sign-in ml-1"></i>
+											</button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</tr>
+				
+				</tbody>
+			</table>
+		</div>
+	
+	</div>
+	</div>
+	</div>
+	<link rel="stylesheet" th:href="@{/css/ForServiceMan.css}"/>
+</section>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{/user/_layout::Layout(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+
+<section style="background:#9E9E9E;">
+	<div class="container text-center mt-3" id="loader" style="display:none;">
+		<span class="fa fa-refresh fa-spin fa-4x" ></span>
+	</div>
+	<main class=" p-5 " style="padding-bottom:80px">
+		<div class="container ">
+			<div class="col-md-6 offset-md-3">
+				<div class="card">
+					<div class="card-header text-center text-white primary-bg">
+						<span class="fa fa-3x fa-user-circle"></span>
+						<br>
+						Apply Service
+					
+					</div>
+					<div class="container text-center mt-3" th:text="${service.service_name}"
+						 style="font-weight: bold;font-family: 'Courier New', monospace;font-style: italic;"></div>
+					<div class="card-body" style="background:#EEEEEE;">
+						<form th:action="@{/user/handle-applydata}" method="POST" th:object="${bookingDetail}"
+							  id="bookingForm">
+							
+							
+							<div class="form-group">
+								<label for="user_name">Full Name</label>
+								<input name="booking_person" type="text" class="form-control" id="user_name"
+									   aria-describedby="emailHelp" placeholder="Enter Name"
+									   th:value="${bookingDetail.booking_person}"
+									   th:classappend="${#fields.hasErrors('booking_person') ? 'is-invalid':''}"
+									   required>
+								<!--								<div th:each="error : ${#fields.errors('booking_person')}"-->
+								<!--									 th:text="${error}" class="invalid-feedback"></div>-->
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label>
+								<input name="booking_email" type="email" class="form-control" id="exampleInputEmail1"
+									   aria-describedby="emailHelp" placeholder="Enter email"
+									   th:value="${bookingDetail.booking_email}"
+									   th:classappend="${#fields.hasErrors('booking_email') ? 'is-invalid':''}"
+									   required>
+								<!--								<div th:each="error : ${#fields.errors('booking_email')}"-->
+								<!--									 th:text="${error}" class="invalid-feedback"></div>-->
+								<small id="emailHelp" class="form-text text-muted">We'll never share your email with
+									anyone else.</small>
+							</div>
+							
+							<div class="form-group">
+								<label for="exampleInputEmail1">Mobile Number</label>
+								<input name="booking_phone" type="number" class="form-control"
+									   id="exampleInputEmail1" aria-describedby="emailHelp"
+									   placeholder="Enter Mobile Number" th:value="${bookingDetail.booking_phone}"
+									   th:classappend="${#fields.hasErrors('booking_phone') ? 'is-invalid':''}"
+									   required>
+								<!--								<div th:each="error : ${#fields.errors('booking_phone')}"-->
+								<!--									 th:text="${error}" class="invalid-feedback"></div>-->
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputCity">City</label>
+									<input type="text" class="form-control" id="inputCity" name="booking_city"
+										   placeholder="Enter City" th:value="${bookingDetail.booking_city}"
+										   th:classappend="${#fields.hasErrors('booking_city') ? 'is-invalid':''}"
+										   required>
+									<!--									<div th:each="error : ${#fields.errors('booking_city')}"-->
+									<!--										 th:text="${error}" class="invalid-feedback"></div>-->
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputstate">State</label>
+									<input type="text" class="form-control" id="inputstate" name="booking_state"
+										   placeholder="Enter State" th:value="${bookingDetail.booking_state}"
+										   th:classappend="${#fields.hasErrors('booking_state') ? 'is-invalid':''}"
+										   required>
+									<!--									<div th:each="error : ${#fields.errors('booking_state')}"-->
+									<!--										 th:text="${error}" class="invalid-feedback"></div>-->
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputZip">ZipCode</label>
+									<input type="text" class="form-control" id="inputZip" placeholder="Enter ZipCode"
+										   name="booking_pincode" th:value="${bookingDetail.booking_pincode}"
+										   th:classappend="${#fields.hasErrors('booking_pincode') ? 'is-invalid':''}"
+										   required>
+									<!--									<div th:each="error : ${#fields.errors('booking_pincode')}"-->
+									<!--										 th:text="${error}" class="invalid-feedback"></div>-->
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlTextarea1">Address</label>
+								<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+										  name="booking_address" th:value="${bookingDetail.booking_address}"
+										  th:classappend="${#fields.hasErrors('booking_address') ? 'is-invalid':''}"
+										  required></textarea>
+								<!--								<div th:each="error : ${#fields.errors('booking_address')}"-->
+								<!--									 th:text="${error}" class="invalid-feedback"></div>-->
+							</div>
+							<input type="hidden" th:value="${service.service_id}" name="service_id"/>
+							<br>
+							<div class="container text-center mt-3">
+								<button type="submit" class="btn btn-primary" id="submit-bt">Submit</button>
+								<button type="reset" class="btn btn-warning" id="submit-btn">Reset</button>
+							</div>
+						</form>
+					
+					</div>
+				
+				
+				</div>
+			</div>
+		</div>
+	</main>
+</section>
+
+</body>
+</html>
